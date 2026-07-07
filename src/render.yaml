@@ -1,4 +1,4 @@
-services:
+rservicese:
   - type: web
     name: leafcheck-camera
     runtime: static
