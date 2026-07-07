@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LeafCheck Camera</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main>
+      <section id="cameraView" class="view app-shell" aria-label="ถ่ายภาพใบ">
+        <section class="camera-panel" aria-label="กล้องตรวจใบ">
+          <div class="topbar">
+            <div>
+              <p class="eyebrow">LeafCheck</p>
+              <h1>ถ่ายภาพใบ</h1>
+            </div>
+            <span id="cameraStatus" class="status-pill">ยังไม่เปิดกล้อง</span>
+          </div>
+
+          <div class="camera-frame">
+            <video id="cameraPreview" autoplay playsinline muted></video>
+            <canvas id="photoCanvas" hidden></canvas>
+            <div id="emptyState" class="empty-state">
+              <div class="lens-icon" aria-hidden="true"></div>
+              <p>กดเปิดกล้องแล้ววางใบให้อยู่กลางกรอบ</p>
+            </div>
+            <div class="leaf-guide" aria-hidden="true"></div>
+          </div>
+
+          <div class="controls" aria-label="เครื่องมือกล้อง">
+            <button id="startCamera" class="primary-btn" type="button">
+              <span aria-hidden="true">▣</span>
+              เปิดกล้อง
+            </button>
+            <button id="capturePhoto" type="button" disabled>
+              <span aria-hidden="true">●</span>
+              ถ่ายภาพ
+            </button>
+            <button id="switchCamera" type="button" disabled>
+              <span aria-hidden="true">↺</span>
+              สลับกล้อง
+            </button>
+            <label class="upload-btn" for="photoUpload">
+              <span aria-hidden="true">↥</span>
+              เลือกรูป
+            </label>
+            <input id="photoUpload" type="file" accept="image/*" capture="environment" />
+          </div>
+        </section>
+      </section>
+
+      <section id="resultView" class="view result-page hidden" aria-label="ผลลัพธ์">
+        <aside class="result-panel result-panel-full">
+          <div class="result-header">
+            <div>
+              <p class="eyebrow">Result</p>
+              <h2>ผลลัพธ์</h2>
+            </div>
+            <button id="backToCamera" type="button">← ย้อนกลับ</button>
+          </div>
+
+          <div class="snapshot-wrap">
+            <img id="snapshot" alt="ภาพใบที่ถ่าย" />
+            <p id="snapshotEmpty">ยังไม่มีภาพที่ถ่าย</p>
+          </div>
+
+          <div id="processingState" class="processing-state">
+            <span class="spinner" aria-hidden="true"></span>
+            <p>กำลังประมวลผลภาพ...</p>
+          </div>
+
+          <div id="analysisState" class="analysis-state">
+            <p class="result-title">รอภาพใบ</p>
+            <p class="result-copy">เมื่อถ่ายภาพแล้ว ระบบจะแสดงผลวิเคราะห์เบื้องต้นและเตรียมจุดต่อ AI จริง</p>
+          </div>
+
+          <dl class="metrics">
+            <div>
+              <dt>คุณภาพภาพ</dt>
+              <dd id="imageQuality">-</dd>
+            </div>
+            <div>
+              <dt>ความมั่นใจ</dt>
+              <dd id="confidence">-</dd>
+            </div>
+          </dl>
+
+          <section class="crop-analysis" aria-label="วิเคราะห์ความสมบูรณ์ของผลผลิต">
+            <div>
+              <h3>ความสมบูรณ์ของผลผลิต</h3>
+              <p id="cropHealthStatus">รอผลวิเคราะห์</p>
+            </div>
+            <div>
+              <h3>สาเหตุที่เป็นไปได้</h3>
+              <p id="cropCause">ต้องมีภาพใบก่อนจึงจะประเมินสาเหตุเบื้องต้นได้</p>
+            </div>
+          </section>
+
+          <div class="recommendation">
+            <h3>แนวทางการแก้ไข</h3>
+            <ul id="recommendations">
+              <li>ถ้าใบเหลือง ให้พิจารณาเพิ่มปุ๋ยไนโตรเจนในอัตราที่เหมาะกับชนิดพืช</li>
+              <li>ถ้าใบไหม้หรือขอบใบแห้ง ให้ลดปุ๋ยเข้มข้นและตรวจการให้น้ำ</li>
+              <li>ถ้ามีจุดด่างหรือแผลบนใบ ให้แยกต้นที่มีอาการและตรวจโรคพืชเพิ่มเติม</li>
+            </ul>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
