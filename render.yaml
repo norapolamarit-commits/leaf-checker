@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: leafcheck-camera
+    runtime: static
+    buildCommand: echo "No build required"
+    staticPublishPath: ./
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: sameorigin
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
